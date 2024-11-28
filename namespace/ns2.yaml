@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ns2
+  labels:
+    app: communicate1-app
+  namespace: surya
+spec:
+  restartPolicy: Always
+  containers:
+    - name: nginx2
+      image: nginx
+      ports:
+        - containerPort: 80

@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploymentns2
+  labels:
+    name: deploymentns2
+    app: communicate1-app
+  namespace: surya
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: communicate1-app
+  template:
+    metadata:
+      labels:
+        app: communicate1-app
+    spec:
+      restartPolicy: Always # Always, OnFailure, Never
+      containers:
+        - name: deploymentns2
+          image: nginx:latest
+          ports:
+            - containerPort: 80

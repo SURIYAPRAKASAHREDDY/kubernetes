@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: busybox
+  namespace: surya
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30005  # Change this port if it's already taken
+  selector:
+    env: test
+    type: nginx

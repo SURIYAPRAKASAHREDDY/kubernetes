@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: surya-rs
+spec:
+  replicas: 5
+  selector:
+   matchLabels:
+     env: my-nginx
+  template:
+    metadata:
+      name: my-nginx
+      labels:
+        env: my-nginx
+    spec:
+      containers:
+        - name: my-nginx
+          image: nginx:latest  

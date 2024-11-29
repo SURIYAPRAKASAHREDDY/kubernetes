@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-affinitynew
+  labels:
+    name: new-affinity
+    env: demo
+  namespace: surya
+spec:
+  containers:
+    - name: my-affinitynew
+      image: nginx
+      ports:
+        - containerPort: 80
+  restartPolicy: Always
+  affinity:
+    nodeAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 1
+          preference:
+            matchExpressions:
+              - key: disktype
+                operator: In
+                values:
+                  - ssd

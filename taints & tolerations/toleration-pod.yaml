@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: surya-app
+  labels:
+    env: demo
+    name: my-surya-app
+spec:
+  containers:
+    - name: my-surya-app
+      image: nginx
+      ports:
+        - containerPort: 80
+  tolerations:
+    - key: "gpu"
+      operator: "Equal"
+      value: ""
+      effect: "NoSchedule"

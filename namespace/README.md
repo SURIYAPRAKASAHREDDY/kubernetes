@@ -76,19 +76,8 @@ Exec into the pod of deploy-ns1 and try to curl the IP address of the pod runnin
 
 # kubectl exec -it deploymentns1-cc44fbf6c-hcszc -n surya -- bash
 
-root@deploymentns1-cc44fbf6c-hcszc:/etc# cat resolv.conf 
+# root@deploymentns1-cc44fbf6c-hcszc:/etc# cat resolv.conf 
 search surya.svc.cluster.local svc.cluster.local cluster.local
 nameserver 10.96.0.10
 options ndots:5
 root@deploymentns1-cc44fbf6c-hcszc:/etc# 
-
-
-
-Your pod-to-pod connection should work, and you should be able to get a successful response back.
-Now scale both of your deployments from 1 to 3 replicas.
-Create two services to expose both of your deployments and name them svc-ns1 and svc-ns2
-exec into each pod and try to curl the IP address of the service running on the other namespace.
-This curl should work.
-Now try curling the service name instead of IP. You will notice that you are getting an error and cannot resolve the host.
-Now use the FQDN of the service and try to curl again, this should work.
-In the end, delete both the namespaces, which should delete the services and deployments underneath them.

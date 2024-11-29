@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: surya-daemonset
+  labels:
+    name: my-daemonset
+    env: dev
+  namespace: surya
+spec:
+  selector:
+    matchLabels:
+      env: dev
+  template:
+    metadata:
+      labels:
+        env: dev
+    spec:
+      containers:
+        - name: my-daemonset
+          image: nginx
+          ports:
+            - containerPort: 80

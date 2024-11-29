@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: my-cronjob
+  namespace: surya
+spec:
+  schedule: " */1 * * * * "
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: my-cronjob
+              image: busybox:1.28
+              args:
+                - /bin/sh
+                - -c
+                - "echo surya cronjob working"
+          restartPolicy: OnFailure

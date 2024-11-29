@@ -33,28 +33,34 @@ A CronJob in Kubernetes is similar to a cron job in Unix/Linux systems. It allow
 | +---------- Hour (0 - 23)
 +------------ Minute (0 - 59)
 
-# for every minute  | for every min on sunday  | for every month 1st sunday at 11:30 pm
+## for every minute  | for every min on sunday  | for every month 1st sunday at 11:30 pm
 
 */1 * * * *         | */1 * * * 0              | 30 23 1-7 * 0 
 
 
 
-kubectl get pods -n surya                              
+kubectl get pods -n surya          
+
 NAME                        READY   STATUS      RESTARTS   AGE
 my-cronjob-28880739-q4g67   0/1     Completed   0          2m15s
 my-cronjob-28880740-cgv95   0/1     Completed   0          75s
 my-cronjob-28880741-rzfsw   0/1     Completed   0          15s
 surya-daemonset-nc5lh       1/1     Running     0          22m
+
 kubernetes\daemonSet> kubectl  logs pod/my-cronjob-28880739-q4g67 -n surya
 surya cronjob working
-kubernetes\daemonSet> kubectl get jobs -n surya                              
+
+kubernetes\daemonSet> kubectl get jobs -n surya   
+
 NAME                  STATUS     COMPLETIONS   DURATION   AGE
 my-cronjob-28880739   Complete   1/1           3s         2m33s
 my-cronjob-28880740   Complete   1/1           2s         93s
 my-cronjob-28880741   Complete   1/1           3s         33s
-kubernetes\daemonSet> kubectl get cronjobs -n surya                          
+kubernetes\daemonSet> kubectl get cronjobs -n surya            
+
 NAME         SCHEDULE        TIMEZONE   SUSPEND   ACTIVE   LAST SCHEDULE   AGE
 my-cronjob    */1 * * * *    <none>     False     0        41s             3m27s
+
 kubernetes\daemonSet> 
 
 

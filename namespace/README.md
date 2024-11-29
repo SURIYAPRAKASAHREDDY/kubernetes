@@ -17,7 +17,7 @@ Create a deployment with a single replica in each of these namespaces with the i
 # kubectl explain deployments
 
 
-### kubectl get all -n surya
+# kubectl get all -n surya
 NAME                                 READY   STATUS    RESTARTS   AGE
 pod/deploymentns1-cc44fbf6c-hcszc    1/1     Running   0          8m9s
 pod/deploymentns2-5c6dd65955-r5x7f   1/1     Running   0          4s

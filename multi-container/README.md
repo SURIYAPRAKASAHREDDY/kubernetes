@@ -13,7 +13,7 @@ Dependency Handling:
 
 Init containers ensure that the environment is properly configured or the required resources are ready before the main containers start running.
 They run sequentially, one after the other, and all must finish successfully before the main container starts.
-# Creating cluster
+## Creating cluster
 kind create cluster --config config.yaml --name surya
 Creating cluster "surya" ...
  • Ensuring node image (kindest/node:v1.31.2) 🖼  ...

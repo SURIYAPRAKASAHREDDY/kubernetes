@@ -40,7 +40,7 @@ In this example:
 # 4. SVC (Service)
 A Service (SVC) is an abstraction that defines a logical set of pods and enables access to them. Services allow you to expose your pods, providing a stable endpoint (DNS name or IP) for accessing your application, even as the pods themselves may change or be scaled.
 
-## Types of Services:
+# Types of Services:
 - ClusterIP (default): Exposes the service on an internal IP in the cluster (can only be accessed from within the cluster).
 - NodePort: Exposes the service on a specific port on each node, which can be accessed externally.
 - LoadBalancer: Exposes the service through a cloud provider’s load balancer (automatically provisions an external load balancer if the cluster is on a supported cloud provider).

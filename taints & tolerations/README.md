@@ -138,7 +138,6 @@ surya-app   0/1     Pending   0          22s
 
 kubectl taint nodes surya-worker gpu=true:NoSchedule-
 node/surya-worker untainted
-PS C:\Users\karri\OneDrive\Desktop\kind\kubernetes\taints & tolerations> kubectl get po                                       
+kubernetes\taints & tolerations> kubectl get po                                       
 NAME        READY   STATUS    RESTARTS   AGE
 surya-app   1/1     Running   0          4m51s
-PS C:\Users\karri\OneDrive\Desktop\kind\kubernetes\taints & tolerations>

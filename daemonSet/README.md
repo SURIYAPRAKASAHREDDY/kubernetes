@@ -45,17 +45,17 @@ my-cronjob-28880739-q4g67   0/1     Completed   0          2m15s
 my-cronjob-28880740-cgv95   0/1     Completed   0          75s
 my-cronjob-28880741-rzfsw   0/1     Completed   0          15s
 surya-daemonset-nc5lh       1/1     Running     0          22m
-PS C:\Users\karri\OneDrive\Desktop\kind\kubernetes\daemonSet> kubectl  logs pod/my-cronjob-28880739-q4g67 -n surya
+kubernetes\daemonSet> kubectl  logs pod/my-cronjob-28880739-q4g67 -n surya
 surya cronjob working
-PS C:\Users\karri\OneDrive\Desktop\kind\kubernetes\daemonSet> kubectl get jobs -n surya                              
+kubernetes\daemonSet> kubectl get jobs -n surya                              
 NAME                  STATUS     COMPLETIONS   DURATION   AGE
 my-cronjob-28880739   Complete   1/1           3s         2m33s
 my-cronjob-28880740   Complete   1/1           2s         93s
 my-cronjob-28880741   Complete   1/1           3s         33s
-PS C:\Users\karri\OneDrive\Desktop\kind\kubernetes\daemonSet> kubectl get cronjobs -n surya                          
+kubernetes\daemonSet> kubectl get cronjobs -n surya                          
 NAME         SCHEDULE        TIMEZONE   SUSPEND   ACTIVE   LAST SCHEDULE   AGE
 my-cronjob    */1 * * * *    <none>     False     0        41s             3m27s
-PS C:\Users\karri\OneDrive\Desktop\kind\kubernetes\daemonSet> 
+kubernetes\daemonSet> 
 
 
 kubectl delete cronjobs/my-cronjob -n surya

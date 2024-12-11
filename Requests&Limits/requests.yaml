@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: memory-demo
+  namespace: mem-exampls
+spec:
+  containers:
+    - name: memory-demo
+      image: nginx
+      ports:
+        - containerPort: 80

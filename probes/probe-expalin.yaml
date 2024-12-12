@@ -1,0 +1,29 @@
+apiVersion: v1 # POD VERSION
+kind: Pod # Kubernetes in Docker : DEFINATION OF  Local Kubernetes.
+metadata: # passing Metadata
+  name: hello
+spec: #Specification of POD 
+  containers: # CONTAINER DEATAILES 
+    - name: liveness
+      image: registry.k8s.io/busybox # IMAGE 
+      args: # Arguments passing in SH
+        - /bin/sh
+        - -c
+        - touch /tmp/healthy; sleep 30; rm -f /tmp/healthy; sleep 600
+        - touch /tmp/rediness; sleep 40
+      livenessProbe: # LIVENESSPROBE WITH EXEC
+        exec:
+          command: # COMMAND FOR PATH VERIFICATION
+            - cat
+            - /tmp/healthy
+        initialDelaySeconds: 5 # EVERY 5 SECONDS IT WILL RE VERIFY THE POD STATUS
+        periodSeconds: 5 # PERIODSECONDS REFRESH ON INTITIALDELAYSECONDS
+      readinessProbe: # READINESSPROD POD GET READY TO ROUTE THE TRAFFIC
+        exec:
+          command: # VALIDATION AFTER ROUTING PATH
+            - cat
+            - /tmp/rediness
+        initialDelaySeconds: 15 # EVERY 15 SECONDS IT WILL RE VERIFY THE POD STATUS
+        periodSeconds: 5 # PERIODSECONDS REFRESH ON INTITIALDELAYSECONDS   
+
+#NOTE  ONCE THE REDINESS IS FAILED THE POD WILL RESTART AFTER LIMIT OF RESTARTS THE TRAFIC WILL ROUTR OTHER POD IF THAT POD IS LIVE THEN STARTUP PROBE WORK ACCORDINGLY 

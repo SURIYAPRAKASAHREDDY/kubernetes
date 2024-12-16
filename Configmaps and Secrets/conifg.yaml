@@ -1,0 +1,7 @@
+apiVersion: v1
+data:
+  firstname: Surya
+  lastname: BOGGULAPALLI
+kind: ConfigMap
+metadata:
+  name: app-cm

@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-app
+  labels:
+    name: my-app
+    env: prod
+  namespace: surya
+spec:
+  containers:
+    - name: my-app
+      image: busybox:1.28
+      env:
+        - name: FIRSTNAME
+          value: "surya"
+          # env:
+      #   - name: FIRSTNAME
+      #     value: "surya"
+      #   - name: PASSWORD
+      #     value: "surya"
+      #   - name: CM
+      #     value: "ConfigMap"   
+      command: ['sh', '-c', 'echo The app is running! && sleep 3600']
+      ports:
+        - containerPort: 80

@@ -175,3 +175,17 @@ hello   0/1     Running   2 (50s ago)   3m20s   10.244.2.14   surya-worker2   <n
 - kubectl get pods
 
 refer - probe-explain.yaml
+
+
+# flow
+
+**Refined Statement:**
+
+Startup Probe → Liveness Probe → Readiness Probe
+
+The Startup Probe checks if the application within the pod has successfully started. This is particularly useful for applications with slow or legacy initialization. During this phase, Kubernetes delays running the Liveness Probe and Readiness Probe until the Startup Probe succeeds.
+Once the Startup Probe confirms the application is up and running:
+
+The Liveness Probe ensures that the application remains healthy and restarts the pod if it becomes unresponsive or enters an unhealthy state.
+The Readiness Probe verifies whether the application is ready to serve traffic and updates the pod's readiness status accordingly.
+If the Startup Probe fails with an error (e.g., the application fails to initialize), Kubernetes considers the pod unhealthy and restarts it. Once restarted, the Readiness Probe will work with the new pod to ensure it's ready to route traffic.

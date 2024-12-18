@@ -1,0 +1,9 @@
+apiVersion: certificates.k8s.io/v1
+kind: CertificateSigningRequest
+metadata:
+  name: surya
+spec:
+  request: "cetificate copy and paste here0"
+  signerName: kubernetes.io/kube-api-scheduler-client
+  expirtionSeconds: 8645445
+  usages: --client auth

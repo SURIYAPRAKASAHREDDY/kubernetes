@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: surya-pod
+  namespace: surya
+spec:
+  containers:
+    - name: my-pod
+      image: nginx
+      ports:
+        - containerPort: 80

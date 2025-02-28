@@ -6,6 +6,9 @@
 -> Asymmetric key encryption                                    - ABAC
 -> Certificate                                                  - NODE
                                                                 - WEBHOOKS 
+Namsspace Scoped                           Cluster Scopped
+
+- pods, Deployments, rs, services          | namespaces and nodes
 
 - RBAC :  In RBAC, we are creating Roles, this roles we are assigning to users/groups, By using roleBinding.
 - NODE :  This Node is work in nodes level, example API server Intarct with KUBELET.
@@ -420,3 +423,5 @@ Subjects:
   ----  ----  ---------
 
   kubectl get sa -A | grep default
+
+  

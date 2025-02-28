@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-fb
+  namespace: fb
+spec:
+  containers:
+    - name: my-fb-conatiner
+      image: nginx
+      ports:
+        - containerPort: 80

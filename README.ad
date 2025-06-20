@@ -1,0 +1,146 @@
+#config.yaml 
+
+Config.yaml is purpose to create new kind cluster.The kind tool lets you define a custom cluster via a YAML config file — especially useful for:
+
+Creating multiple control-plane or worker nodes
+
+Port-forwarding for services (like Jenkins on port 8080)
+
+Mounting volumes
+
+Enabling specific Kubernetes features
+
+ kind: Cluster        
+apiVersion: kind.x-k8s.io/v1alpha4     -- image
+nodes:
+  - role: control-plane                -- master node
+  - role: worker                       --  2 worker nodes
+  - role: worker
+    extraPortMappings:
+      - containerPort: 30005           -- nodeport
+        hostPort: 30005
+------------------------------------------------------------------------
+PVC (PersistentVolumeClaim)
+Purpose:
+To provide persistent storage to a pod (e.g., for Jenkins job configs, plugins, and build history).
+
+Why use it:
+
+Pods are ephemeral — if they restart, local data is lost.
+
+PVC connects the pod to storage (EBS, disk, NFS, etc.) that survives restarts.
+
+Example Use:
+Jenkins stores all configurations in /var/jenkins_home. Without PVC, data would be lost on pod restart.
+
+------------------------------------------------------------------------
+Service (svc)
+Purpose:
+To expose a pod to other parts of the cluster or to the outside world (depending on the type: ClusterIP, NodePort, LoadBalancer).
+
+Why use it:
+
+Pods have dynamic IPs — services provide a stable endpoint.
+
+Allows load balancing between multiple pod replicas.
+
+Service Types:
+
+ClusterIP: Internal only
+
+NodePort: Exposes on host machine IP + port (e.g., localhost:30005)
+
+LoadBalancer: For cloud environments (adds external IP)
+
+----------------------------------------------------------------------
+
+Deployment
+Purpose:
+To manage the lifecycle of pods, allowing replication, rolling updates, and self-healing (restart pods on failure).
+
+Why use it:
+
+You define how many replicas to run.
+
+It will automatically replace crashed pods.
+
+Supports version upgrades (rolling updates).
+
+Easier to manage compared to raw pods.
+
+Example Use:
+Instead of manually managing Jenkins pods, use a Deployment to ensure 1 pod is always running, with auto-restart and upgrade control.
+
+-------------------------------------------------------------------
+
+#Commands used:
+
+Creating all service : kubectl apply -f jenkins.yaml 
+
+Creating name space : create ns <name_space>
+
+Creating cluster : kind create cluster --config config.yaml --name surya 
+
+To Get deltails of nodes : kubectl get nodes 
+
+To Get details about all services : kubectl get all -n name_space
+
+To get pods : kubectl get pods -o wide -n name_space
+
+To login pod : kubectl exec --it pod/pod_name -- bash
+
+To Post forwarding pod connection: kubectl port-forward service/jenkins-service 8080:8080
+
+
+try connect your application : http://localhost:30005/
+
+---------------------------------------------------------------
+
+Why we need to Environment variables 
+
+What Are Environment Variables?
+Environment variables are key-value pairs that are injected into containers to configure application behavior without changing the code.
+
+Why Use Environment Variables in Pods?
+Configuration Management
+
+Allows separating configuration from the application code.
+
+> Easy to modify values like DB credentials, API keys, and feature flags without rebuilding the container image.
+
+> Secrets and Sensitive Data
+
+> Used to pass sensitive information such as:
+
+> Database usernames/passwords
+
+> Tokens or API keys
+
+> Connection strings ,Portability & Scalability
+
+> Same container image can be used in different environments (dev, staging, prod) by changing only the environment variables.
+
+> Decouple from Infrastructure
+
+> Apps don't need to know details about the infrastructure; they just read from environment variables.
+
+> Easier CI/CD Integration
+
+> Environments in CI/CD pipelines can pass environment-specific variables to the Pods dynamically.
+
+Variables can control things like:
+
+> Logging level (DEBUG, INFO)
+
+Feature toggles
+
+Region or environment name (ENV=prod)
+#Defined in the Pod/Deployment YAML under env:
+env:
+  - name: DB_HOST
+    value: "mysql-service"
+  - name: DB_USER
+    valueFrom:
+      secretKeyRef:
+        name: db-credentials
+        key: username

@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment # Deployment 
+metadata:
+  name: jenkins
+  labels:
+    app: jenkins
+spec:
+  replicas: 1 # Jenkins is typically stateful; scaling horizontally needs special config
+  selector:
+    matchLabels:
+      app: jenkins
+  template:
+    metadata:
+      labels:
+        app: jenkins
+    spec:
+      containers:
+        - name: jenkins
+          image: jenkins/jenkins:lts # image name - you can change accrodingly your requirement 
+          ports:
+            - containerPort: 8080 # should change according to image-container ex: postgresql = 5432
+            - containerPort: 50000
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "500m"
+            limits:
+              memory: "2Gi"
+              cpu: "1000m"
+          volumeMounts:
+            - name: jenkins-data
+              mountPath: /var/jenkins_home
+      volumes:
+        - name: jenkins-data
+          persistentVolumeClaim:
+            claimName: jenkins-pvc
